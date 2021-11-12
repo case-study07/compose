@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  admin-node:
+    container_name: ${IW_NODE_IMAGE}
+    image: cs-admin-backend:latest
+    command: "yarn dev"
+    ports:
+      - ${ADMIN_NODE_HOST_PORT}:${ADMIN_NODE_CONTAINER_PORT}
+
+  end-node:
+    container_name: ${IW_NODE_IMAGE}
+    image: cs-end-backend:latest
+    command: "yarn dev"
+    ports:
+      - ${END_NODE_HOST_PORT}:${END_NODE_CONTAINER_PORT}
+
+  mysql:
+    container_name: ${DB_CONTAINER_NAME}
+    image: mariadb:10.5
+    ports:
+      - ${DB_HOST_PORT}:${DB_CONTAINER_PORT}
+    volumes:
+      - database:/var/lib/mysql
+    env_file:
+      - .database.env
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - ${AD_HOST_PORT}:${AD_CONTAINER_PORT}
+    env_file:
+      - .database.env
+volumes:
+  database:
