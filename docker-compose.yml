@@ -2,14 +2,18 @@ version: "3.9"
 services:
   admin-node:
     container_name: ${IW_NODE_IMAGE}
-    image: cs-admin-backend:latest
+    # image: cs-admin-backend:latest
+    build:
+      context: ./
     command: "yarn dev"
     ports:
       - ${ADMIN_NODE_HOST_PORT}:${ADMIN_NODE_CONTAINER_PORT}
 
   end-node:
     container_name: ${IW_NODE_IMAGE}
-    image: cs-end-backend:latest
+    build:
+      context: ./
+    # image: cs-end-backend:latest
     command: "yarn dev"
     ports:
       - ${END_NODE_HOST_PORT}:${END_NODE_CONTAINER_PORT}
