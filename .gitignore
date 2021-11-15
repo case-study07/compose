@@ -1,4 +1,7 @@
 .env
-admin/
-enduser/
+.database.env
+admin_back
+admin_front
+end_back
+end_front
 .DS_Store

@@ -1,14 +1,20 @@
-base_url := https://raw.githubusercontent.com/case-study07/document/main/config/
-enduser := enduser
-admin := admin
+base_url := https://github.com/case-study07
+admin_front := admin_front
+end_front := end_front
+admin_back := admin_back
+end_back := end_back
 
 configure:
-	git clone https://github.com/case-study07/cs-end-backend ${enduser}
-		cd ${PWD}/${enduser} && rm .prettierrc && curl ${base_url}.prettierrc > .prettierrc
-		cd ${PWD}/${enduser} && rm tsconfig.json && curl ${base_url}tsconfig.json > tsconfig.json
-		cd ${PWD}/${enduser} && rm Dockerfile && curl ${base_url}Dockerfile > Dockerfile
-	git clone https://github.com/case-study07/cs-end-backend ${admin}
-		cd ${PWD}/${admin} && rm .prettierrc && curl ${base_url}.prettierrc > .prettierrc
-		cd ${PWD}/${admin} && rm tsconfig.json && curl ${base_url}tsconfig.json > tsconfig.json
-		cd ${PWD}/${admin} && rm Dockerfile && curl ${base_url}Dockerfile > Dockerfile
-		
+	@git clone ${base_url}/cs-admin-frontend ${admin_front}
+	@git clone ${base_url}/cs-end-frontend ${end_front}
+	@git clone ${base_url}/cs-admin-backend ${admin_back}
+	@git clone ${base_url}/cs-end-backend ${end_back}
+	
+build:
+	@docker compose build --no-cache
+
+up:
+	@docker compose up -d
+
+down:
+	@docker compose down

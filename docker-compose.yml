@@ -1,28 +1,60 @@
 version: "3.9"
 services:
-  admin-node:
-    container_name: ${IW_NODE_IMAGE}
-    # image: cs-admin-backend:latest
+  admin-frontend:
+    container_name: admin-frontend
+    # image: raityupiyo/cs-admin-frontend:latest
     build:
-      context: ./
+      context: admin_front/
+      target: dev
     command: "yarn dev"
     ports:
-      - ${ADMIN_NODE_HOST_PORT}:${ADMIN_NODE_CONTAINER_PORT}
+      - 3100:3000
+    volumes:
+      - ./admin_front:/app
+      - /app/node_modules
+
+  end-frontend:
+    container_name: end-frontend
+    # image: raityupiyo/cs-end-frontend:latest
+    build:
+      context: end_front/
+      target: dev
+    command: "yarn dev"
+    ports:
+      - 3200:3000
+    volumes:
+      - ./end_front:/app
+      - /app/node_modules
+
+  admin-node:
+    container_name: admin-node
+    # image: cs-admin-backend:latest
+    build:
+      context: end_back/
+    command: "yarn dev"
+    ports:
+      - 9100:9000
+    volumes:
+      - ./admin_back:/app
+      - /app/node_modules
 
   end-node:
-    container_name: ${IW_NODE_IMAGE}
+    container_name: end-node
     build:
-      context: ./
+      context: admin_back/
     # image: cs-end-backend:latest
     command: "yarn dev"
     ports:
-      - ${END_NODE_HOST_PORT}:${END_NODE_CONTAINER_PORT}
+      - 9200:9000
+    volumes:
+      - ./end_back:/app
+      - /app/node_modules
 
   mysql:
-    container_name: ${DB_CONTAINER_NAME}
+    container_name: mysql
     image: mariadb:10.5
     ports:
-      - ${DB_HOST_PORT}:${DB_CONTAINER_PORT}
+      - 33060:3306
     volumes:
       - database:/var/lib/mysql
     env_file:
@@ -31,7 +63,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     ports:
-      - ${AD_HOST_PORT}:${AD_CONTAINER_PORT}
+      - 8081:80
     env_file:
       - .database.env
 volumes:
