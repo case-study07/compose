@@ -4,6 +4,33 @@ end_front := end_front
 admin_back := admin_back
 end_back := end_back
 
+## This Makefile How to Use
+help:
+	@echo ""
+	@echo "usage: make COMMAND"
+	@echo ""
+	@echo "Commands:"
+	@echo "  configure                 local environment setup"
+	@echo "  build                     local environment build"
+	@echo "  up                        local environment start"
+	@echo "  down                      local environment delete"
+	@echo ""
+	@echo "-- Admin Frontend Operation --"
+	@echo "  af/add package="hoge"     yarn add Package"
+	@echo "  af/remove package="hoge"  yarn remove Package"
+	@echo ""
+	@echo "-- End Frontend Operation --"
+	@echo "  ef/add package="hoge"     yarn add Package"
+	@echo "  ef/remove package="hoge"  yarn remove Package"
+	@echo ""
+	@echo "-- Admin Backend Operation --"
+	@echo "  ab/add package="hoge"     yarn add Package"
+	@echo "  ab/remove package="hoge"  yarn remove Package"
+	@echo ""
+	@echo "-- End Backend Operation --"
+	@echo "  eb/add package="hoge"     yarn add Package"
+	@echo "  eb/remove package="hoge"  yarn remove Package"
+
 ## Local Environment SetUp
 configure:
 	@git clone ${base_url}/cs-admin-frontend ${admin_front}
