@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   admin-frontend:
-    container_name: admin-frontend
+    container_name: admin_front
     # image: raityupiyo/cs-admin-frontend:latest
     build:
       context: admin_front/
@@ -11,10 +11,10 @@ services:
       - 3100:3000
     volumes:
       - ./admin_front:/app
-      - /app/node_modules
+      - af_nodemodules:/app/node_modules
 
   end-frontend:
-    container_name: end-frontend
+    container_name: end_front
     # image: raityupiyo/cs-end-frontend:latest
     build:
       context: end_front/
@@ -24,10 +24,10 @@ services:
       - 3200:3000
     volumes:
       - ./end_front:/app
-      - /app/node_modules
+      - ef_nodemodules:/app/node_modules
 
-  admin-node:
-    container_name: admin-node
+  admin-backend:
+    container_name: admin_back
     # image: cs-admin-backend:latest
     build:
       context: end_back/
@@ -36,10 +36,10 @@ services:
       - 9100:9000
     volumes:
       - ./admin_back:/app
-      - /app/node_modules
+      - ab_nodemodules:/app/node_modules
 
-  end-node:
-    container_name: end-node
+  end-backend:
+    container_name: end_back
     build:
       context: admin_back/
     # image: cs-end-backend:latest
@@ -48,7 +48,7 @@ services:
       - 9200:9000
     volumes:
       - ./end_back:/app
-      - /app/node_modules
+      - eb_nodemodules:/app/node_modules
 
   mysql:
     container_name: mysql
@@ -68,3 +68,7 @@ services:
       - .database.env
 volumes:
   database:
+  ab_nodemodules:
+  af_nodemodules:
+  eb_nodemodules:
+  ef_nodemodules:
