@@ -30,7 +30,8 @@ services:
     container_name: admin_back
     # image: cs-admin-backend:latest
     build:
-      context: end_back/
+      context: admin_back/
+      target: dev
     command: "yarn dev"
     ports:
       - 9100:9000
@@ -42,6 +43,7 @@ services:
     container_name: end_back
     build:
       context: admin_back/
+      target: dev
     # image: cs-end-backend:latest
     command: "yarn dev"
     ports:
