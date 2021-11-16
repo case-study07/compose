@@ -17,18 +17,21 @@ help:
 	@echo ""
 	@echo "-- Admin Frontend Operation --"
 	@echo "  af/add package="hoge"     yarn add Package"
+	@echo "  af/devadd package="hoge"  yarn add -D Package"
 	@echo "  af/remove package="hoge"  yarn remove Package"
 	@echo ""
 	@echo "-- End Frontend Operation --"
-	@echo "  ef/add package="hoge"     yarn add Package"
+	@echo "  ef/devadd package="hoge"  yarn add -D Package"
 	@echo "  ef/remove package="hoge"  yarn remove Package"
 	@echo ""
 	@echo "-- Admin Backend Operation --"
 	@echo "  ab/add package="hoge"     yarn add Package"
+	@echo "  ab/devadd package="hoge"  yarn add -D Package"
 	@echo "  ab/remove package="hoge"  yarn remove Package"
 	@echo ""
 	@echo "-- End Backend Operation --"
 	@echo "  eb/add package="hoge"     yarn add Package"
+	@echo "  eb/devadd package="hoge"  yarn add Package"
 	@echo "  eb/remove package="hoge"  yarn remove Package"
 
 ## Local Environment SetUp
@@ -53,6 +56,10 @@ af/add:
 	@docker container exec -it $(admin_front) bash -c "yarn add $(package)"
 	@docker container cp ${admin_front}:/app/node_modules $(PWD)/${admin_front}/node_modules
 
+af/devadd:
+	@docker container exec -it $(admin_front) bash -c "yarn add -D $(package)"
+	@docker container cp ${admin_front}:/app/node_modules $(PWD)/${admin_front}/node_modules
+
 af/remove:
 	@docker container exec -it $(admin_front) bash -c "yarn remove $(package)"
 	@docker container cp ${admin_front}:/app/node_modules $(PWD)/${admin_front}/node_modules
@@ -68,6 +75,10 @@ ef/add:
 	@docker container exec -it $(end_front) bash -c "yarn add $(package)"
 	@docker container cp ${end_front}:/app/node_modules $(PWD)/${end_front}/node_modules
 
+ef/devadd:
+	@docker container exec -it $(end_front) bash -c "yarn add -D $(package)"
+	@docker container cp ${end_front}:/app/node_modules $(PWD)/${end_front}/node_modules
+
 ef/remove:
 	@docker container exec -it $(admin_front) bash -c "yarn remove $(package)"
 	@docker container cp ${end_front}:/app/node_modules $(PWD)/${end_front}/node_modules
@@ -79,31 +90,39 @@ ef/flogs:
 	@docker container logs -f $(end_front)
 
 ## EndBack Operation
-ef/add:
+eb/add:
 	@docker container exec -it $(end_back) bash -c "yarn add $(package)"
 	@docker container cp ${end_back}:/app/node_modules $(PWD)/${end_back}/node_modules
 
-ef/remove:
+eb/devadd:
+	@docker container exec -it $(end_back) bash -c "yarn add -D $(package)"
+	@docker container cp ${end_back}:/app/node_modules $(PWD)/${end_back}/node_modules
+
+eb/remove:
 	@docker container exec -it $(end_back) bash -c "yarn remove $(package)"
 	@docker container cp ${end_back}:/app/node_modules $(PWD)/${end_back}/node_modules
 
-ef/logs:
+eb/logs:
 	@docker container logs $(end_back)
 
-ef/flogs:
+eb/flogs:
 	@docker container logs -f $(end_back)
 
 ## AdminBack Operation
-ef/add:
+ab/add:
 	@docker container exec -it $(admin_back) bash -c "yarn add $(package)"
 	@docker container cp ${admin_back}:/app/node_modules $(PWD)/${admin_back}/node_modules
 
-ef/remove:
+ab/devadd:
+	@docker container exec -it $(admin_back) bash -c "yarn add -D $(package)"
+	@docker container cp ${admin_back}:/app/node_modules $(PWD)/${admin_back}/node_modules
+
+ab/remove:
 	@docker container exec -it $(admin_back) bash -c "yarn remove $(package)"
 	@docker container cp ${admin_back}:/app/node_modules $(PWD)/${admin_back}/node_modules
 
-ef/logs:
+ab/logs:
 	@docker container logs $(admin_back)
 
-ef/flogs:
+ab/flogs:
 	@docker container logs -f $(admin_back)
