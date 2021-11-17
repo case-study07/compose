@@ -15,6 +15,7 @@ help:
 	@echo "  module/install            node_modules From container To local environment"
 	@echo "  up                        local environment start"
 	@echo "  down                      local environment delete"
+	@echo "  develop/start             allow-enpty commit"
 	@echo ""
 	@echo "-- Admin Frontend Operation --"
 	@echo "  af/install                yarn install"
@@ -61,6 +62,11 @@ up:
 
 down:
 	@docker compose down
+
+## Git Operation
+develop/start:
+	@git commit --allow-empty -m "開発開始"
+	@git push origin $(shell git rev-parse --abbrev-ref HEAD)
 
 ##  AdminFront Operation
 af/install:
