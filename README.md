@@ -30,8 +30,11 @@ which make
 | module/install           | コンテナに存在するnode_modulesをローカルに移動する           |
 | up                       | 開発環境を立ち上げる                                         |
 | down                     | 開発環境を削除する                                           |
-| develop/start issue=hoge | 1. 空コミットを作成する<br />2. GitHubに空コミットした内容をpushする<br />3. 指定したIssue番号を紐づけたプルリクエストを作成する |
-| restart                  | docker rm -f && docker run                                   |
+| **Git の操作**  |                                                              |
+| af/develop issue=1 | 1. 指定したIssue番号のブランチを作成する<br />2. 空コミットする<br />3. GitHubに空コミットした内容をpushする<br />4. 指定したIssue番号を紐づけたプルリクエストを作成する |
+| ef/develop issue=1 | 1. 指定したIssue番号のブランチを作成する<br />2. 空コミットする<br />3. GitHubに空コミットした内容をpushする<br />4. 指定したIssue番号を紐づけたプルリクエストを作成する |
+| ab/develop issue=1 | 1. 指定したIssue番号のブランチを作成する<br />2. 空コミットする<br />3. GitHubに空コミットした内容をpushする<br />4. 指定したIssue番号を紐づけたプルリクエストを作成する |
+| eb/develop issue=1 | 1. 指定したIssue番号のブランチを作成する<br />2. 空コミットする<br />3. GitHubに空コミットした内容をpushする<br />4. 指定したIssue番号を紐づけたプルリクエストを作成する |
 | **Admin Frontendの操作** |                                                              |
 | af/install               | AdminFrontendの環境でyarn installを実行する                  |
 | af/add package=hoge      | AdminFrontendの環境でpackageで指定したパッケージをインストールする |
@@ -52,4 +55,3 @@ which make
 | eb/add package=hoge      | EndBackendの環境でpackageで指定したパッケージをインストールする |
 | eb/devadd package=hoge   | EndBackendの環境でpackageで指定したパッケージをdevへインストールする |
 | eb/remove package=hoge   | EndBackendの環境でpackageで指定したパッケージを削除する      |
-|                          |                                                              |
