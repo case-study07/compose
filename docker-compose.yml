@@ -12,6 +12,8 @@ services:
     volumes:
       - ./admin_front:/app
       - af_nodemodules:/app/node_modules
+    profiles:
+      - admin
 
   end-frontend:
     container_name: end_front
@@ -25,6 +27,8 @@ services:
     volumes:
       - ./end_front:/app
       - ef_nodemodules:/app/node_modules
+    profiles:
+      - end
 
   admin-backend:
     container_name: admin_back
@@ -38,6 +42,8 @@ services:
     volumes:
       - ./admin_back:/app
       - ab_nodemodules:/app/node_modules
+    profiles:
+      - admin
 
   end-backend:
     container_name: end_back
@@ -51,6 +57,8 @@ services:
     volumes:
       - ./end_back:/app
       - eb_nodemodules:/app/node_modules
+    profiles:
+      - end
 
   mysql:
     container_name: mysql
@@ -68,6 +76,7 @@ services:
       - 8081:80
     env_file:
       - .database.env
+
 volumes:
   database:
   ab_nodemodules:
