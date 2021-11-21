@@ -13,8 +13,12 @@ help:
 	@echo "  configure                 local environment setup"
 	@echo "  build                     local environment build"
 	@echo "  module/install            node_modules From container To local environment"
-	@echo "  up                        local environment start"
-	@echo "  down                      local environment delete"
+	@echo "  all/up                    local environment all start"
+	@echo "  end/up                    local environment end start"
+	@echo "  admin/up                  local environment admin start"
+	@echo "  all/down                  local environment all delete"
+	@echo "  end/down                  local environment end delete"
+	@echo "  admin/down                local environment admin delete"
 	@echo ""
 	@echo "-- Git Operation --"
 	@echo "  af/develop issue=1        allow-empty commit & github push & qr request"
@@ -62,11 +66,23 @@ module/install:
 	docker container cp ${end_back}:/app/node_modules $(PWD)/${end_back}
 	docker container cp ${admin_back}:/app/node_modules $(PWD)/${admin_back}
 
-up:
-	@docker compose up -d
+all/up:
+	@docker compose --profile all up -d
+
+end/up:
+	@docker compose --profile end up -d
+
+admin/up:
+	@docker compose --profile admmin up -d
 
 down:
-	@docker compose down
+	@docker compose --profile all down
+
+end/down:
+	@docker compose --profile end down
+
+admin/down:
+	@docker compose --profile admin down
 
 ### Git Operation
 af/develop:
