@@ -14,6 +14,7 @@ services:
       - af_nodemodules:/app/node_modules
     profiles:
       - admin
+      - all
 
   end-frontend:
     container_name: end_front
@@ -29,6 +30,7 @@ services:
       - ef_nodemodules:/app/node_modules
     profiles:
       - end
+      - all
 
   admin-backend:
     container_name: admin_back
@@ -44,6 +46,7 @@ services:
       - ab_nodemodules:/app/node_modules
     profiles:
       - admin
+      - all
 
   end-backend:
     container_name: end_back
@@ -59,6 +62,7 @@ services:
       - eb_nodemodules:/app/node_modules
     profiles:
       - end
+      - all
 
   mysql:
     container_name: mysql
